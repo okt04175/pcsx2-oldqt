@@ -37,9 +37,9 @@ echo INSTALLDIR=%INSTALLDIR%
 
 cd "%BUILDDIR%"
 
-set QT=6.5.2
-set QTMINOR=6.5
-set SDL=SDL2-2.28.2
+set QT=6.2.5
+set QTMINOR=6.2
+set SDL=SDL2-2.28.3
 
 call :downloadfile "%SDL%.zip" "https://libsdl.org/release/%SDL%.zip" 22383a6b242bac072f949d2b3854cf04c6856cae7a87eaa78c60dd733b71e41e || goto error
 call :downloadfile "qtbase-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qtbase-everywhere-src-%QT%.zip" f770a087e350d688441880d08ad2791465e5e3b9a0f8fc2cfbeb5dd305a11d50 || goto error
