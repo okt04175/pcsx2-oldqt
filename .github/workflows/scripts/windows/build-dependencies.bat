@@ -43,7 +43,7 @@ set SDL=SDL2-2.28.2
 
 call :downloadfile "%SDL%.zip" "https://libsdl.org/release/%SDL%.zip" 22383a6b242bac072f949d2b3854cf04c6856cae7a87eaa78c60dd733b71e41e || goto error
 call :downloadfile "qtbase-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qtbase-everywhere-src-%QT%.zip" 80c3fe2ae1062abf56456f52518bd670f9ec3917b7f85e152b347ac6b6faf880 || goto error
-call :downloadfile "qtimageformats-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qtimageformats-everywhere-src-%QT%.zip" a37c88bfd44e18ba7670ab2f8bf146b66c5fd331b8aa927d556e8d1837a5cfc3 || goto error
+call :downloadfile "qtimageformats-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qtimageformats-everywhere-src-%QT%.zip" 80c3fe2ae1062abf56456f52518bd670f9ec3917b7f85e152b347ac6b6faf880 || goto error
 call :downloadfile "qtsvg-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qtsvg-everywhere-src-%QT%.zip" 7ecc0cc48e8d7e2a61f2b5a9b296c65938c5e161246dccdd63f7771292a9d3b6 || goto error
 call :downloadfile "qttools-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qttools-everywhere-src-%QT%.zip" 825bbdb60f7a68cf6a94a3ec93e5444294e8673df5a040ef64daa90f6c21121f || goto error
 call :downloadfile "qttranslations-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qttranslations-everywhere-src-%QT%.zip" c5dedd55813733fae4173d08b7c1f55e725b5a1899f84543ed7fcbea4adce869 || goto error
