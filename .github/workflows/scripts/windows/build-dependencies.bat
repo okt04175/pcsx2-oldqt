@@ -37,16 +37,16 @@ echo INSTALLDIR=%INSTALLDIR%
 
 cd "%BUILDDIR%"
 
-set QT=6.2.5
+set QT=6.2.4
 set QTMINOR=6.2
 set SDL=SDL2-2.28.2
 
 call :downloadfile "%SDL%.zip" "https://libsdl.org/release/%SDL%.zip" 22383a6b242bac072f949d2b3854cf04c6856cae7a87eaa78c60dd733b71e41e || goto error
-call :downloadfile "qtbase-everywhere-opensource-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qtbase-everywhere-opensource-src-%QT%.zip" 9188e2d44d1aedd8f884f9ddf34d9972978ce3670afae21c5b23a15d70adae5f || goto error
-call :downloadfile "qtimageformats-everywhere-opensource-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qtimageformats-everywhere-opensource-src-%QT%.zip" a37c88bfd44e18ba7670ab2f8bf146b66c5fd331b8aa927d556e8d1837a5cfc3 || goto error
-call :downloadfile "qtsvg-everywhere-opensource-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qtsvg-everywhere-opensource-src-%QT%.zip" 7ecc0cc48e8d7e2a61f2b5a9b296c65938c5e161246dccdd63f7771292a9d3b6 || goto error
-call :downloadfile "qttools-everywhere-opensource-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qttools-everywhere-opensource-src-%QT%.zip" 825bbdb60f7a68cf6a94a3ec93e5444294e8673df5a040ef64daa90f6c21121f || goto error
-call :downloadfile "qttranslations-everywhere-opensource-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qttranslations-everywhere-opensource-src-%QT%.zip" c5dedd55813733fae4173d08b7c1f55e725b5a1899f84543ed7fcbea4adce869 || goto error
+call :downloadfile "qtbase-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qtbase-everywhere-src-%QT%.zip" bf33cac019be657e2677303bc00245b292c4922d66dad5d5c9893c45aa886455 || goto error
+call :downloadfile "qtimageformats-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qtimageformats-everywhere-src-%QT%.zip" aac41b7657345bec53cc6a2f67d5843098978840e5ae3acba45437ac29280029 || goto error
+call :downloadfile "qtsvg-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qtsvg-everywhere-src-%QT%.zip" 0e5c62b9e016e2589db72fa1e9c1382e8818da8cc3f8fc7f91d40f7f3b2d5ea3 || goto error
+call :downloadfile "qttools-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qttools-everywhere-src-%QT%.zip" 3e54e5fe846f8a967a601b6c49635d15e75ce4395fed73b66945d7bca1e239d4 || goto error
+call :downloadfile "qttranslations-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qttranslations-everywhere-src-%QT%.zip" 5ca70aab6877ef40572584b00ce4ad23a5fce8b68f47c7e2c69dbe1f7f72e7ab || goto error
 
 if %DEBUG%==1 (
   echo Building debug and release libraries...
@@ -75,18 +75,18 @@ if %DEBUG%==1 (
 )
 
 echo Building Qt base...
-rmdir /S /Q "qtbase-everywhere-opensource-src-%QT%"
-%SEVENZIP% x "qtbase-everywhere-opensource-src-%QT%.zip" || goto error
-cd "qtbase-everywhere-opensource-src-%QT%" || goto error
+rmdir /S /Q "qtbase-everywhere-src-%QT%"
+%SEVENZIP% x "qtbase-everywhere-src-%QT%.zip" || goto error
+cd "qtbase-everywhere-src-%QT%" || goto error
 cmake -B build -DFEATURE_sql=OFF -DCMAKE_INSTALL_PREFIX="%INSTALLDIR%" -DINPUT_gui=yes -DINPUT_widgets=yes -DINPUT_ssl=yes -DINPUT_openssl=no -DINPUT_schannel=yes %QTBUILDSPEC% || goto error
 cmake --build build --parallel || goto error
 ninja -C build install || goto error
 cd .. || goto error
 
 echo Building Qt SVG...
-rmdir /S /Q "qtsvg-everywhere-opensource-src-%QT%"
-%SEVENZIP% x "qtsvg-everywhere-opensource-src-%QT%.zip" || goto error
-cd "qtsvg-everywhere-opensource-src-%QT%" || goto error
+rmdir /S /Q "qtsvg-everywhere-src-%QT%"
+%SEVENZIP% x "qtsvg-everywhere-src-%QT%.zip" || goto error
+cd "qtsvg-everywhere-src-%QT%" || goto error
 mkdir build || goto error
 cd build || goto error
 call "%INSTALLDIR%\bin\qt-configure-module.bat" .. || goto error
@@ -95,9 +95,9 @@ ninja install || goto error
 cd ..\.. || goto error
 
 echo Building Qt Image Formats...
-rmdir /S /Q "qtimageformats-everywhere-opensource-src-%QT%"
-%SEVENZIP% x "qtimageformats-everywhere-opensource-src-%QT%.zip" || goto error
-cd "qtimageformats-everywhere-opensource-src-%QT%" || goto error
+rmdir /S /Q "qtimageformats-everywhere-src-%QT%"
+%SEVENZIP% x "qtimageformats-everywhere-src-%QT%.zip" || goto error
+cd "qtimageformats-everywhere-src-%QT%" || goto error
 mkdir build || goto error
 cd build || goto error
 call "%INSTALLDIR%\bin\qt-configure-module.bat" .. || goto error
@@ -106,9 +106,9 @@ ninja install || goto error
 cd ..\.. || goto error
 
 echo Building Qt Tools...
-rmdir /S /Q "qtimageformats-everywhere-opensource-src-%QT%"
-%SEVENZIP% x "qttools-everywhere-opensource-src-%QT%.zip" || goto error
-cd "qttools-everywhere-opensource-src-%QT%" || goto error
+rmdir /S /Q "qtimageformats-everywhere-src-%QT%"
+%SEVENZIP% x "qttools-everywhere-src-%QT%.zip" || goto error
+cd "qttools-everywhere-src-%QT%" || goto error
 mkdir build || goto error
 cd build || goto error
 call "%INSTALLDIR%\bin\qt-configure-module.bat" .. -- -DFEATURE_assistant=OFF -DFEATURE_clang=OFF -DFEATURE_designer=OFF -DFEATURE_kmap2qmap=OFF -DFEATURE_pixeltool=OFF -DFEATURE_pkg_config=OFF -DFEATURE_qev=OFF -DFEATURE_qtattributionsscanner=OFF -DFEATURE_qtdiag=OFF -DFEATURE_qtplugininfo=OFF || goto error
@@ -117,9 +117,9 @@ ninja install || goto error
 cd ..\.. || goto error
 
 echo Building Qt Translations...
-rmdir /S /Q "qttranslations-everywhere-opensource-src-%QT%"
-%SEVENZIP% x "qttranslations-everywhere-opensource-src-%QT%.zip" || goto error
-cd "qttranslations-everywhere-opensource-src-%QT%" || goto error
+rmdir /S /Q "qttranslations-everywhere-src-%QT%"
+%SEVENZIP% x "qttranslations-everywhere-src-%QT%.zip" || goto error
+cd "qttranslations-everywhere-src-%QT%" || goto error
 mkdir build || goto error
 cd build || goto error
 call "%INSTALLDIR%\bin\qt-configure-module.bat" .. || goto error
