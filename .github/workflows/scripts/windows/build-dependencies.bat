@@ -42,13 +42,11 @@ set QTMINOR=6.2
 set SDL=SDL2-2.28.3
 
 call :downloadfile "%SDL%.zip" "https://libsdl.org/release/%SDL%.zip" 22383a6b242bac072f949d2b3854cf04c6856cae7a87eaa78c60dd733b71e41e || goto error
-call :downloadfile "qtbase-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qtbase-everywhere-src-%QT%.zip" f770a087e350d688441880d08ad2791465e5e3b9a0f8fc2cfbeb5dd305a11d50 || goto error
-call :downloadfile "qtimageformats-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qtimageformats-everywhere-src-%QT%.zip" 9757899b00eea4e6b65f81f922c0215c70969661567398d91da6639a50a788e7 || goto error
-call :downloadfile "qtsvg-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qtsvg-everywhere-src-%QT%.zip" 0546a6aa19f5e0188d1ba4a0e0a1423d22b7dc55ce8a614cc4aa65bfac506f74 || goto error
-call :downloadfile "qttools-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qttools-everywhere-src-%QT%.zip" 3148f4f263bf9930d89107eb44bc452481a5f8c6178459e26ecbf3c8dca3b5c7 || goto error
-call :downloadfile "qttranslations-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qttranslations-everywhere-src-%QT%.zip" 8b99046b54c40106d4e310be63b41331b717cfd8b42da4b4fc1c9169604be7fc || goto error
-
-call :downloadfile "4b119f48f5cb5e1499f91a0791150231c47430d4.diff" "https://github.com/qt/qtbase/commit/4b119f48f5cb5e1499f91a0791150231c47430d4.diff" d86bd2bd4ee2aff5f5e97da027aa926178dca250d163427eb21503bb357730a5 || goto error
+call :downloadfile "qtbase-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qtbase-everywhere-src-%QT%.zip" 9188e2d44d1aedd8f884f9ddf34d9972978ce3670afae21c5b23a15d70adae5f || goto error
+call :downloadfile "qtimageformats-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qtimageformats-everywhere-src-%QT%.zip" a37c88bfd44e18ba7670ab2f8bf146b66c5fd331b8aa927d556e8d1837a5cfc3 || goto error
+call :downloadfile "qtsvg-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qtsvg-everywhere-src-%QT%.zip" 7ecc0cc48e8d7e2a61f2b5a9b296c65938c5e161246dccdd63f7771292a9d3b6 || goto error
+call :downloadfile "qttools-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qttools-everywhere-src-%QT%.zip" 825bbdb60f7a68cf6a94a3ec93e5444294e8673df5a040ef64daa90f6c21121f || goto error
+call :downloadfile "qttranslations-everywhere-src-%QT%.zip" "https://download.qt.io/official_releases/qt/%QTMINOR%/%QT%/submodules/qttranslations-everywhere-src-%QT%.zip" c5dedd55813733fae4173d08b7c1f55e725b5a1899f84543ed7fcbea4adce869 || goto error
 
 if %DEBUG%==1 (
   echo Building debug and release libraries...
@@ -80,7 +78,6 @@ echo Building Qt base...
 rmdir /S /Q "qtbase-everywhere-src-%QT%"
 %SEVENZIP% x "qtbase-everywhere-src-%QT%.zip" || goto error
 cd "qtbase-everywhere-src-%QT%" || goto error
-"C:\Program Files\Git\usr\bin\patch" -p1 < ../4b119f48f5cb5e1499f91a0791150231c47430d4.diff || goto error
 cmake -B build -DFEATURE_sql=OFF -DCMAKE_INSTALL_PREFIX="%INSTALLDIR%" -DINPUT_gui=yes -DINPUT_widgets=yes -DINPUT_ssl=yes -DINPUT_openssl=no -DINPUT_schannel=yes %QTBUILDSPEC% || goto error
 cmake --build build --parallel || goto error
 ninja -C build install || goto error
