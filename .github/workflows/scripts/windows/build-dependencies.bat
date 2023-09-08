@@ -75,18 +75,18 @@ if %DEBUG%==1 (
 )
 
 echo Building Qt base...
-rmdir /S /Q "qtbase-everywhere-src-%QT%"
-%SEVENZIP% x "qtbase-everywhere-src-%QT%.zip" || goto error
-cd "qtbase-everywhere-src-%QT%" || goto error
+rmdir /S /Q "qtbase-everywhere-opensource-src-%QT%"
+%SEVENZIP% x "qtbase-everywhere-opensource-src-%QT%.zip" || goto error
+cd "qtbase-everywhere-opensource-src-%QT%" || goto error
 cmake -B build -DFEATURE_sql=OFF -DCMAKE_INSTALL_PREFIX="%INSTALLDIR%" -DINPUT_gui=yes -DINPUT_widgets=yes -DINPUT_ssl=yes -DINPUT_openssl=no -DINPUT_schannel=yes %QTBUILDSPEC% || goto error
 cmake --build build --parallel || goto error
 ninja -C build install || goto error
 cd .. || goto error
 
 echo Building Qt SVG...
-rmdir /S /Q "qtsvg-everywhere-src-%QT%"
-%SEVENZIP% x "qtsvg-everywhere-src-%QT%.zip" || goto error
-cd "qtsvg-everywhere-src-%QT%" || goto error
+rmdir /S /Q "qtsvg-everywhere-opensource-src-%QT%"
+%SEVENZIP% x "qtsvg-everywhere-opensource-src-%QT%.zip" || goto error
+cd "qtsvg-everywhere-opensource-src-%QT%" || goto error
 mkdir build || goto error
 cd build || goto error
 call "%INSTALLDIR%\bin\qt-configure-module.bat" .. || goto error
@@ -95,9 +95,9 @@ ninja install || goto error
 cd ..\.. || goto error
 
 echo Building Qt Image Formats...
-rmdir /S /Q "qtimageformats-everywhere-src-%QT%"
-%SEVENZIP% x "qtimageformats-everywhere-src-%QT%.zip" || goto error
-cd "qtimageformats-everywhere-src-%QT%" || goto error
+rmdir /S /Q "qtimageformats-everywhere-opensource-src-%QT%"
+%SEVENZIP% x "qtimageformats-everywhere-opensource-src-%QT%.zip" || goto error
+cd "qtimageformats-everywhere-opensource-src-%QT%" || goto error
 mkdir build || goto error
 cd build || goto error
 call "%INSTALLDIR%\bin\qt-configure-module.bat" .. || goto error
@@ -106,9 +106,9 @@ ninja install || goto error
 cd ..\.. || goto error
 
 echo Building Qt Tools...
-rmdir /S /Q "qtimageformats-everywhere-src-%QT%"
-%SEVENZIP% x "qttools-everywhere-src-%QT%.zip" || goto error
-cd "qttools-everywhere-src-%QT%" || goto error
+rmdir /S /Q "qtimageformats-everywhere-opensource-src-%QT%"
+%SEVENZIP% x "qttools-everywhere-opensource-src-%QT%.zip" || goto error
+cd "qttools-everywhere-opensource-src-%QT%" || goto error
 mkdir build || goto error
 cd build || goto error
 call "%INSTALLDIR%\bin\qt-configure-module.bat" .. -- -DFEATURE_assistant=OFF -DFEATURE_clang=OFF -DFEATURE_designer=OFF -DFEATURE_kmap2qmap=OFF -DFEATURE_pixeltool=OFF -DFEATURE_pkg_config=OFF -DFEATURE_qev=OFF -DFEATURE_qtattributionsscanner=OFF -DFEATURE_qtdiag=OFF -DFEATURE_qtplugininfo=OFF || goto error
@@ -117,9 +117,9 @@ ninja install || goto error
 cd ..\.. || goto error
 
 echo Building Qt Translations...
-rmdir /S /Q "qttranslations-everywhere-src-%QT%"
-%SEVENZIP% x "qttranslations-everywhere-src-%QT%.zip" || goto error
-cd "qttranslations-everywhere-src-%QT%" || goto error
+rmdir /S /Q "qttranslations-everywhere-opensource-src-%QT%"
+%SEVENZIP% x "qttranslations-everywhere-opensource-src-%QT%.zip" || goto error
+cd "qttranslations-everywhere-opensource-src-%QT%" || goto error
 mkdir build || goto error
 cd build || goto error
 call "%INSTALLDIR%\bin\qt-configure-module.bat" .. || goto error
